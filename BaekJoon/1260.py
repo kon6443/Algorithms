@@ -1,40 +1,46 @@
+from collections import deque
 
 def main():
-    print('Problem 1260 starting... Enter your input: ')
-    N, M, startingNum = map(int, input().split())
-    list = [[None for _ in range(2)] for _ in range(M)]
-    dfs = []
-    bfs = []
-    for i in range(M):
-        temp1, temp2 = map(int, input().split())
-        list[i][0] = temp1
-        list[i][1] = temp2
-    dfs.append(startingNum)
-    while len(dfs)!=M:
-        if(startingNum not in dfs):
-            dfs.append(findConnectedVertex(startingNum, list))
-    print(dfs)
-        
-def findConnectedVertex(target, list):
-    return_value = []
-    for i in range(len(list)):
-        if(list[i][0]==target):
-            return_value.append(list[i][1])
-        elif(list[i][1]==target): 
-            return_value.append(list[i][0])
-    return findMinInList(return_value)
+    N, M, V = map(int, input().split())
+    global graph, visited, queue
+    graph = [[] for _ in range(N+1)]
+    visited = [False] * (N+1)
+    for _ in range(M):
+        a, b = map(int, input().split())
+        graph[a].append(b)
+        graph[b].append(a)
+    # sorting a graph
+    for i in range(1, N+1):
+        graph[i].sort()
+    dfs(V)
+    visited = [False] * (N+1)
+    print()
+    bfs(V)
+    print()
 
-def findMinInList(list):
-    return_value = list[0]
-    for item in list:
-        if(return_value>item):
-            return_value = item
-    return return_value
+def bfs(n):
+    queue = deque([])
+    queue.append(n)
+    visited[n] = True
+    while queue:
+        v = queue.popleft()
+        print(v, end=' ')
+        for item in graph[v]:
+            if not visited[item]:
+                queue.append(item)
+                visited[item] = True
 
-def mainn():
-    target = 4
-    list2 = [[1,2],[1,3],[1,4],[2,4],[3,4]]
-    print(findTargets(target,list2))
+def dfs(n):
+    print(n, end=' ')
+    visited[n] = True
+    for item in graph[n]:
+        if not visited[item]:
+            dfs(item)
+            
+def printAdjacencyList(graph):
+    print('printing graph after sorting...')
+    for i in range(1, len(graph)):
+        print(graph[i])
 
 if __name__ == '__main__':
     main()

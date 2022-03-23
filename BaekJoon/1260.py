@@ -2,9 +2,9 @@ from collections import deque
 
 def main():
     N, M, V = map(int, input().split())
-    global graph, visited, queue
+    global graph, attendance, queue
     graph = [[] for _ in range(N+1)]
-    visited = [False] * (N+1)
+    attendance = [False] * (N+1)
     for _ in range(M):
         a, b = map(int, input().split())
         graph[a].append(b)
@@ -13,28 +13,28 @@ def main():
     for i in range(1, N+1):
         graph[i].sort()
     dfs(V)
-    visited = [False] * (N+1)
+    attendance = [False] * (N+1)
     print()
     bfs(V)
     print()
 
 def bfs(n):
-    queue = deque([])
-    queue.append(n)
-    visited[n] = True
+    q = deque([])
+    q.append(n)
+    attendance[n] = True
     while queue:
-        v = queue.popleft()
+        v = q.popleft()
         print(v, end=' ')
         for item in graph[v]:
-            if not visited[item]:
-                queue.append(item)
-                visited[item] = True
+            if not attendance[item]:
+                q.append(item)
+                attendance[item] = True
 
 def dfs(n):
     print(n, end=' ')
-    visited[n] = True
+    attendance[n] = True
     for item in graph[n]:
-        if not visited[item]:
+        if not attendance[item]:
             dfs(item)
             
 def printAdjacencyList(graph):

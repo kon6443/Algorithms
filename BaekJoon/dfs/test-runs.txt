@@ -1,0 +1,27 @@
+◦ countem (from your home directory) - should print an error (no directory argument
+supplied)
+
+scott@Onam-Kwons-MacBookPro examprac % ./countem
+No directory argument supplied.
+
+
+◦ countem /etc . (from your home directory) - should work
+
+scott@Onam-Kwons-MacBookPro examprac % sudo ./countem /etc
+Password:
+Path: /etc
+Total #: 352
+// It requires sudo command at the beginning and the terminal asked to type my laptop password.
+
+
+
+◦ countem /bin (from any directory) - should work
+
+scott@Onam-Kwons-MacBookPro examprac % ./countem /bin 
+The number of files and directories: 36
+
+
+◦ countem /bin/sh (from any directory) - should print an error (it's not a directory)
+
+scott@Onam-Kwons-MacBookPro examprac % ./countem /bin/sh
+error: chdir..

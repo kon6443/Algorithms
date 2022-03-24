@@ -10,6 +10,7 @@ def main():
     # getting inputs, spliting and coverting to int type
     for _ in range(n):
         maze.append(list(map(int, input())))
+    # left, down, right, up
     dx = [-1, 0, 1, 0]
     dy = [0, -1, 0, 1]
     attendance = [[0] * m for _ in range(n)]
@@ -18,10 +19,11 @@ def main():
     attendance[0][0] = 1
     while q:
         x, y = q.popleft()
-        # print out the final value once get destination.
+        # print out the final value once it gets the destination.
         if x == n-1 and y == m-1:
             print(attendance[x][y])
         for i in range(4):
+            # initializing next steps to explore further each direction.
             nx, ny = x + dx[i], y + dy[i]
             # when new x and y locations are inside of the maze
             if 0 <= nx < n and 0 <= ny < m: 

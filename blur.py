@@ -14,31 +14,24 @@ def average(img, x, y, blurfactor):
     height = img.shape[0]
     rtotal = gtotal = btotal = 0
     for y2 in range(y - blurfactor, y + blurfactor+1):
-    # for y2 in range(y - blurfactor, y + blurfactor + 1):
         for x2 in range(x - blurfactor, x + blurfactor+1):
-        # for x2 in range(x - blurfactor, x + blurfactor + 1):
             if (y2 not in range(height)) or (x2 not in range(width)):
                 continue
             else: 
                 r, g, b = (int(img[y2,x2,0]), int(img[y2,x2,1]), int(img[y2,x2,2]))
                 (rtotal,gtotal,btotal) = (rtotal+r,gtotal+g,btotal+b)
-                # print('Yes: ', 'y2:',y2, 'x2:',x2)
     (rAverage,gAverage,bAverage) = (rtotal//((blurfactor*2+1)**2)), (gtotal//((blurfactor*2+1)**2)), (btotal//((blurfactor*2+1)**2))
     return (rAverage, gAverage, bAverage)
 
 def blur(blurfactor):
-    # Default file name is 'first.jpg'.
+    # Default file name is 'cat.jpg'.
     img = imread('cat.jpg')
     width = img.shape[1]
     height = img.shape[0]
     img2 = Image.new("RGB", (width, height), (0,0,0))
-    # for y in range(blurfactor, height - blurfactor):
     for y in range(height):    
-        # for x in range(blurfactor, width - blurfactor):
         for x in range(width):
-            # (r,g,b) = (int(img[y,x,0]),int(img[y,x,1]),int(img[y,x,2]))
             r, g, b = average(img, x, y, blurfactor)
-            #img2[y,x,0], img2[y,x,1], img2[y,x,2] = r2,g2,b2
             img2.putpixel((x,y), (r,g,b))
             progress = (y)/(height-blurfactor)
             update_progress(progress)

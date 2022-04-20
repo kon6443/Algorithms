@@ -4,10 +4,10 @@ def dfs(numbers, target):
     elif len(numbers)==0:
         return 0
     else:
-        res = 0
-        res += dfs(numbers[:-1], target+numbers[-1])
-        res += dfs(numbers[:-1], target-numbers[-1])
-        return res
+        answer = 0
+        answer += dfs(numbers[:-1], target+numbers[-1])
+        answer += dfs(numbers[:-1], target-numbers[-1])
+        return answer
     
 def solution(numbers, target):
     answer = dfs(numbers, target)

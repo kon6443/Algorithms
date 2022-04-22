@@ -1,6 +1,3 @@
-genres = ["classic", "pop", "classic", "classic", "pop", "K"]
-plays = [500, 600, 150, 800, 2500, 300]
-
 def solution(genres, plays):
     answer = []
     d = {} # hash
@@ -28,6 +25,3 @@ def solution(genres, plays):
             # if a particular genre has only one song, break the loop.
             if len(d[item])<2: break
     return answer
-
-print('my answer: ', solution(genres, plays))
-print('answer should be: [4, 1, 3, 0, 5]')

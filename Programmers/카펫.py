@@ -1,5 +1,6 @@
 def solution(brown, yellow):
     sum = brown + yellow
+    # exhaustive search
     for height in range(1, sum+1):
         if (sum%height)==0:
             width = sum/height

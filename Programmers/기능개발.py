@@ -5,7 +5,7 @@ def solution(progresses, speeds):
     requiredDays = []
     for i in range(len(progresses)):
         requiredDays.append(math.ceil((100-progresses[i])/speeds[i]))
-    while len(requiredDays)>0:
+    while requiredDays:
         # Subtracting ith value from every element in requiredDays list
         requiredDays = [x - abs(requiredDays[0]) for x in requiredDays]
         

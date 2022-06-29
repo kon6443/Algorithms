@@ -5,9 +5,9 @@ def solution(jobs):
     start = -1
     heap = []
     while i<len(jobs):
-        for j in jobs:
-            if start < j[0] <= now:
-                heapq.heappush(heap, [j[1], j[0]])
+        for job in jobs:
+            if start < job[0] <= now:
+                heapq.heappush(heap, [job[1], job[0]])
         if len(heap)>0:
             current = heapq.heappop(heap)
             start = now

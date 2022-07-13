@@ -21,7 +21,7 @@ private:
     Node* pCursor;
 public:
     DLL();
-    //~DLL();
+    ~DLL();
     void insertion(int);
     void deletion(int);
     void traversal();
@@ -30,11 +30,9 @@ public:
 };
 
 Node::Node() {
-    //this->data = NULL;
     this->pPrev = NULL;
     this->pNext = NULL;
 }
-
 
 Node::Node(int data) {
     this->data = data;
@@ -45,10 +43,14 @@ Node::Node(int data) {
 Node::~Node() {}
 
 DLL::DLL() {
-    Node* pHead = new Node();
-    Node* pTail = new Node();
-    Node* pCursor = new Node();
+    pHead = new Node(); 
+    pTail = new Node();
+    pCursor = new Node();
+    pHead->pNext = pTail;
+    pTail->pPrev = pHead;
 }
+
+DLL::~DLL() {}
 
 void DLL::insertion(int data) {
     Node* temp = new Node(data);
@@ -68,6 +70,7 @@ void DLL::deletion(int data) {
                 pCursor->pPrev->pNext = pCursor->pNext;
                 pCursor->pNext->pPrev = pCursor->pPrev;
                 delete pCursor;
+                return ;
             } else {
                 pCursor = pCursor->pNext;
             }
@@ -87,7 +90,17 @@ void DLL::traversal() {
     }
 }
 
-// void DLL::reverseTraversal() {}
+void DLL::reverseTraversal() {
+    if(pTail->pPrev == pHead) cout<<"No node exists"<<endl;
+    else {
+        pCursor = pTail->pPrev;
+        while(pCursor != pHead) {
+            cout<<pCursor->data<<" ";
+            pCursor = pCursor->pPrev;
+        }
+        cout<<endl;
+    }
+}
 
 int DLL::size() {
     int size = 0;
@@ -109,6 +122,13 @@ int main() {
     dll.insertion(2);
     dll.insertion(3);
     dll.traversal();
+    dll.reverseTraversal();
+    cout<<"After deletion"<<endl;
+    dll.deletion(3);
+    dll.traversal();
+    dll.reverseTraversal();
+    cout<<"size: "<<dll.size()<<endl;
 
     return 0;
 }
+

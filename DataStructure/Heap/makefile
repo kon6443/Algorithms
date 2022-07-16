@@ -1,7 +1,8 @@
-maxHeap:
+all: maxHeap minHeap
+maxHeap: maxHeap.cpp
 	g++ -o maxHeap maxHeap.cpp
-minHeap:
-	g++ -o minHeap minHeap.cpp
+minHeap.o: minHeap.cpp
+	g++ -o minHeap  minHeap.cpp
 clean:
 	rm maxHeap minHeap
 

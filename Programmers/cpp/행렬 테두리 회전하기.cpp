@@ -14,10 +14,10 @@ void print2DMatrix(vector<vector<int>> matrix) {
 }
 
 vector<vector<int>> rotateMatrix(vector<vector<int>> matrix, vector<int> query, vector<int> &answer) {
-    int x1 = query[0];
-    int y1 = query[1];
-    int x2 = query[2];
-    int y2 = query[3];
+    int x1 = query[0]-1;
+    int y1 = query[1]-1;
+    int x2 = query[2]-1;
+    int y2 = query[3]-1;
     int top_left = matrix[x1][y1];
     int minimum = top_left;
     for(int i=x1;i<x2;i++) {
@@ -37,7 +37,6 @@ vector<vector<int>> rotateMatrix(vector<vector<int>> matrix, vector<int> query, 
         matrix[x1][i] = matrix[x1][i-1];
     }
     matrix[x1][y1+1] = top_left;
-    cout<<"Min: "<<minimum<<endl;
     answer.push_back(minimum);
     return matrix;
 }
@@ -58,18 +57,10 @@ vector<vector<int>> getInitialMatrix(int rows, int columns) {
 vector<int> solution(int rows, int columns, vector<vector<int>> queries) {
     vector<int> answer;
     vector<vector<int>> matrix = getInitialMatrix(rows, columns);
-    
-    vector<int> v = {2,2,5,4};
-    matrix = rotateMatrix(matrix, v, answer);
-    
-    // for(int i=0;i<queries.size();i++) {
-    //     vector<int> v;
-    //     for(int j=0;j<queries[i].size();j++) v.push_back(queries[i][j]);
-    //     matrix = rotateMatrix(matrix, v, answer);
-    //     print2DMatrix(matrix);
-    // }
-    // cout<<answer[0]<<endl;
-    sort(answer.begin(), answer.end());
+    for(int i=0;i<queries.size();i++) {
+        vector<int> v;
+        for(int j=0;j<queries[i].size();j++) v.push_back(queries[i][j]);
+        matrix = rotateMatrix(matrix, v, answer);
+    }
     return answer;
 }
-

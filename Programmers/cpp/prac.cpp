@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -9,13 +10,14 @@ void foo2(int a);
 
 int main() {
     
-    vector<int> v(5, 0);
-    for(auto &item: v) cout<<&item<<endl;
-    cout<<endl;
-    cout<<&v[0]<<endl;
-    &v[1] = &v[0];
-    // cout<<&v[0]<<&v[1]<<endl;
-    cout<<endl;
+    map<char, char> m;
+    m['A'] = '1';
+    m['B'] = '2';
+    m['C'] = '3';
+    cout<<m['A']<<endl;
+    cout<<m['B']<<endl;
+    cout<<m['C']<<endl;
+    
     return 0;
 }
 

@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -49,32 +50,21 @@ vector<int> solution(vector<string> id_list, vector<string> report, int k) {
         removeDuplicates(ban);
     }
     
-    for(int i=0;i<reportList.size();i++) {
-        cout<<id_list[i]<<": ";
-        for(int j=0;j<reportList[i].size();j++) {
-            cout<<reportList[i][j]<<" ";
-        }cout<<endl;
-    }
-    cout<<endl;
-    
     // Counting number of being reported
-    vector<int> count(id_list.size(), 0);
+    map<string, int> warningCount;
+    for(const auto &id: id_list) warningCount[id]=0;
     for(int m=0;m<id_list.size();m++) {
         for(int i=0;i<reportList.size();i++) {
             for(int j=0;j<reportList[i].size();j++) {
                 if(id_list[m]==reportList[i][j]) {
-                    count[m]++;
+                    warningCount[id_list[m]]++;
                 }
             }
         }
     }
-    for(const auto &item: count) cout<<item<<" ";
-    cout<<endl;
-    for(int i=0;i<id_list.size();i++) {
-        for(int j=0;j<reportList.size();j++) {
-            for(int m=0;m<reportList[j].size();m++) {
-                if(reportList[j][m]==id_list[i]) answer[i]++;
-            }
+    for(int i=0;i<reportList.size();i++) {
+        for(int j=0;j<reportList[i].size();j++) {
+            if(warningCount[reportList[i][j]]>=k) answer[i]++;
         }
     }
     return answer;

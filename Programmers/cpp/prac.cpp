@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -6,14 +8,14 @@ void foo(int &a);
 void foo2(int a);
 
 int main() {
-
-    int a = 0;
-    cout<<"a: "<<a<<endl;
-    cout<<"&a: "<<&a<<endl;
-
-    foo(a);
-    foo2(a);
-
+    
+    vector<int> v(5, 0);
+    for(auto &item: v) cout<<&item<<endl;
+    cout<<endl;
+    cout<<&v[0]<<endl;
+    &v[1] = &v[0];
+    // cout<<&v[0]<<&v[1]<<endl;
+    cout<<endl;
     return 0;
 }
 

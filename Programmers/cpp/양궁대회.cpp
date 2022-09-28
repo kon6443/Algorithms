@@ -5,26 +5,22 @@
 
 using namespace std;
 
-int max_gap = -1;
+int max_gap = 0;
 vector<vector<int>> possibilities;
 
 vector<int> getAnswer(vector<vector<int>> &possibilities) {
-    if(possibilities.size()==1) return possibilities[0];
-    int cursor = 0;
-    string temp = "";
-    
-    for(int j=0;j<11;j++) temp += to_string(possibilities[cursor][j]);
-    long long min = stoll(temp);
-    
-    for(int i=1;i<possibilities.size();i++) {
-        temp = "";
-        for(int j=0;j<11;j++) {
-            temp += to_string(possibilities[i][j]);
+    int length = possibilities.size();
+    if(length==1) return possibilities[0];    
+    int max, cursor = 0;
+    for(int i=10;i>=0;i--) {
+        max, cursor = 0;
+        for(int j=0;j<length;j++) {
+            if(possibilities[j][i]>max) {
+                max = possibilities[j][i];
+                cursor = j;
+            }
         }
-        if(min>stoll(temp)) {
-            min = stoll(temp);
-            cursor = i;
-        }
+        if(max!=0) break;
     }
     return possibilities[cursor];
 }
@@ -38,8 +34,7 @@ int getGap(vector<int> &apeach, vector<int> &lion) {
         }
         else lion_score += 10-i;
     }
-    // cout<<lion_score - apeach_score<<endl;
-    // cout<<apeach_score - lion_score<<endl;
+    if(lion_score - apeach_score==0) return -1;
     return lion_score - apeach_score;
 }
 

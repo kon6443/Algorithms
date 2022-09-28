@@ -12,19 +12,11 @@ void pracMap();
 
 int main() {
     
-    vector<int> v = {1,2,3};
-    do {
-        print(v);
-    } while (next_permutation(v.begin(), v.end()));
+    int a = 20;
+    string s = to_string(a);
+    cout<<s<<endl;
     
     return 0;
-}
-
-void print(vector<int> &v) {
-    for(int e : v) {
-        cout<<" "<<e;
-    }
-    cout<<endl;
 }
 
 void pracMap() {

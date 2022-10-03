@@ -10,15 +10,60 @@ void foo(int &a);
 void foo2(int a);
 void pracMap();
 void pracConvert();
+template<typename T>
 void printVector(vector<T> &v);
+string getContinents(vector<string> &, int &, int &);
+bool isCursorOut(int &, int &);
+
+int n, m;
+vector<vector<bool>> attendance;
+int dx[4] = {1, 0, -1, 0};
+int dy[4] = {0, 1, 0, -1};
 
 int main() {
-    int money = 12;
-    int tax = money/10;
-    cout<<tax<<endl;
-    cout<<money-tax<<endl;
-
+    vector<string> worldMap;
+    worldMap.push_back("AAB..");
+    worldMap.push_back("ABB.C");
+    worldMap.push_back("AAB.C");
+    worldMap.push_back(".CC.C");
+    worldMap.push_back("C....");
+    n = worldMap.size();
+    m = worldMap[0].size();
+    for(const auto &item: worldMap) cout<<item<<endl;
+    attendance = vector<vector<bool>> (n, vector<bool>(m, false));
+    vector<string> continents;
+    for(int i=0;i<attendance.size();i++) {
+        for(int j=0;j<attendance[0].size();j++) {
+            if(attendance[i][j]) continue;
+            else {
+                continents.push_back(getContinents(worldMap, i, j));
+            }
+        }
+    }
+    sort(continents.begin(), continents.end());
+    for(int i=0;i<continents.size();i++) {
+        for(int j=0;j<continents[0].size();j++) {
+            cout<<continents[i][j]<<" ";
+        }cout<<endl;
+    }
     return 0;
+}
+
+bool isCursorOut(int &x, int &y) {
+    return x<0 || x>=n || y<0 || y>=n;
+}
+
+string getContinents(vector<string> &worldMap, int &x, int &y) {
+    string continent = "";
+    if(isCursorOut(x, y) || attendance[x][y]) return NULL;
+    continent += worldMap[x][y];
+    attendance[x][y] == true;
+    for(int i=0;i<4;i++) {
+        int nx = x+dx[i];
+        int ny = x+dy[i];
+        continent += getContinents(worldMap, nx, ny);
+    }
+    return continent;
 }
 
 template<typename T>

@@ -12,7 +12,7 @@ void pracMap();
 void pracConvert();
 template<typename T>
 void printVector(vector<T> &v);
-string getContinents(vector<string> &, int , int );
+string getContinents(vector<string> &, int &, int &);
 bool isCursorOut(int &, int &);
 
 int n, m;
@@ -30,7 +30,6 @@ int main() {
     worldMap.push_back("..DDD...");
     n = worldMap.size();
     m = worldMap[0].size();
-    cout<<"n, m: "<<n<<", "<<m<<endl;
     for(const auto &item: worldMap) cout<<item<<endl;
     attendance = vector<vector<bool>> (n, vector<bool>(m, false));
     for(int i=0;i<n;i++) {
@@ -62,7 +61,7 @@ bool isCursorOut(int &x, int &y) {
     return x<0 || x>=n || y<0 || y>=m;
 }
 
-string getContinents(vector<string> &worldMap, int x, int y) {
+string getContinents(vector<string> &worldMap, int &x, int &y) {
     string continent = "";
     if(isCursorOut(x, y) || attendance[x][y]) return "";
     continent += worldMap[x][y];

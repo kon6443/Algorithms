@@ -17,5 +17,8 @@ int main() {
 
     int t = s.top();  // t = 2
 
+    // Stack size: 2
+    cout<<"Stack size: "<<s.size()<<endl;
+
     return 0;
 }

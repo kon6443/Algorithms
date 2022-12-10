@@ -39,6 +39,7 @@ int main() {
         cout<<i<<"'s divisors: ";
         printDivisors(v);
 
+
         v = betterWayToGetDivisor(i);
         cout<<i<<"'s divisors better way: ";
         printDivisors(v);

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <map>
+#include <vector>
 
 using namespace std;
 
@@ -9,16 +9,16 @@ int main() {
      * Program that making a list that contains numbers of divisors.
      */
 
-    map<int,int> dp;
     int limit = 20;
+    vector<int> dp(limit+1);
     for(int i=1;i<=limit;i++) {
         for(int j=i;j<=limit;j+=i) {
             dp[j]++;
         }
     }
 
-    for(const auto &i: dp) {
-        cout<<i.first<<": "<<i.second<<endl;
+    for(int i=1;i<dp.size();i++) {
+        cout<<i<<": "<<dp[i]<<endl;
     }
 
     return 0;

@@ -16,8 +16,9 @@ int main() {
         v.push_back(cursor);
     } while(next_permutation(n.begin(),n.end()));
     
-    for(const auto &p: v) {
-        for(const auto &item: p) {
+    for(int i=0;i<v.size();i++) {
+        cout<<i<<": ";
+        for(const auto &item: v[i]) {
             cout<<item<<" ";
         } cout<<endl;
     }
